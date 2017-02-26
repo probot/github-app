@@ -2,6 +2,7 @@
   "name": "github-integration",
   "version": "1.0.0",
   "description": "NodeJS module for building GitHub Integrations",
+  "repository": "bkeepers/github-integration",
   "main": "index.js",
   "scripts": {
     "test": "xo"
