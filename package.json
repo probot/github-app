@@ -1,7 +1,7 @@
 {
   "name": "github-integration",
   "version": "1.0.0",
-  "description": "Easily implement GitHub Integrations",
+  "description": "NodeJS module for building GitHub Integrations",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

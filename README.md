@@ -1,6 +1,6 @@
 # GitHub Integration
 
-This node module handles authentication for the [GitHub Integrations](https://developer.github.com/early-access/integrations/) API.
+NodeJS module for building [GitHub Integrations](https://developer.github.com/early-access/integrations/).
 
 ## Installation
 
@@ -24,7 +24,7 @@ const integration = createIntegration({
 
 ### `asInstallation`
 
-[Authenticate as an installation](https://developer.github.com/early-access/integrations/authentication/#as-an-installation), returning a [github API client](https://github.com/mikedeboer/node-github), which can be used to call any of the [APIs supported by GitHub Integrations](https://developer.github.com/early-access/integrations/available-endpoints/):
+Authenticate [as an installation](https://developer.github.com/early-access/integrations/authentication/#as-an-installation), returning a [github API client](https://github.com/mikedeboer/node-github), which can be used to call any of the [APIs supported by GitHub Integrations](https://developer.github.com/early-access/integrations/available-endpoints/):
 
 ```js
 var installationId = 99999;
@@ -41,7 +41,7 @@ integration.asInstallation(installationId).then(github => {
 
 ### `asIntegration`
 
-[Authenticate as an integration](https://developer.github.com/early-access/integrations/authentication/#as-an-integration), also returning an instance of the GitHub API client.
+Authenticate [as an integration](https://developer.github.com/early-access/integrations/authentication/#as-an-integration), also returning an instance of the GitHub API client.
 
 ```js
 integration.asIntegration().then(github => {
