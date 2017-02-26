@@ -4,10 +4,10 @@
 //
 // Usage: INTEGRATION_ID=417 node example.js
 
-const createWebhook = require('github-webhook-handler');
-const createIntegration = require('github-integration');
 const http = require('http');
 const fs = require('fs');
+const createWebhook = require('github-webhook-handler');
+const createIntegration = require('../index.js');
 
 const webhook = createWebhook({
   path: '/',
@@ -16,7 +16,7 @@ const webhook = createWebhook({
 
 const integration = createIntegration({
   id: process.env.INTEGRATION_ID,
-  cert: process.env.PRIVATE_KEY || fs.readFileSync('private-key.pem'),
+  cert: process.env.PRIVATE_KEY || fs.readFileSync('private-key.pem')
 });
 
 const server = http.createServer((req, res) => {
@@ -33,9 +33,8 @@ const server = http.createServer((req, res) => {
 });
 
 // Comment on opened issues
-webhook.on('issues', function(event) {
-  if(event.payload.action == 'opened') {
-    console.log("event", event);
+webhook.on('issues', event => {
+  if (event.payload.action === 'opened') {
     integration.asInstallation(event.payload.installation.id).then(github => {
       github.issues.createComment({
         owner: event.payload.repository.owner.login,
@@ -47,5 +46,5 @@ webhook.on('issues', function(event) {
   }
 });
 
-console.log("Listing on http://localhost:3000");
+console.log('Listing on http://localhost:3000');
 server.listen(3000);

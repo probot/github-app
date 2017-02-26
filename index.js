@@ -1,8 +1,7 @@
-const process = require('process');
 const jwt = require('jsonwebtoken');
 const GitHubApi = require('github');
 
-module.exports = function({id, cert, debug = false}) {
+module.exports = function ({id, cert, debug = false}) {
   function asIntegration() {
     const github = new GitHubApi({debug});
     github.authenticate({type: 'integration', token: generateJwt(id, cert)});
@@ -12,7 +11,7 @@ module.exports = function({id, cert, debug = false}) {
 
   // Authenticate as the given installation
   function asInstallation(installationId) {
-    return createToken(installationId).then((token) => {
+    return createToken(installationId).then(token => {
       const github = new GitHubApi({debug});
       github.authenticate({type: 'token', token: token.token});
       return github;
