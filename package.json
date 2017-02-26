@@ -1,0 +1,16 @@
+{
+  "name": "github-integration",
+  "version": "1.0.0",
+  "description": "Easily implement GitHub Integrations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brandon Keepers",
+  "license": "ISC",
+  "dependencies": {
+    "github": "^8.1.0",
+    "github-webhook-handler": "^0.6.0",
+    "jsonwebtoken": "^7.3.0"
+  }
+}
