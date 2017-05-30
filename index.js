@@ -5,7 +5,7 @@ module.exports = function ({id, cert, debug = false}) {
   function asIntegration() {
     const github = new GitHubApi({debug});
     github.authenticate({type: 'integration', token: generateJwt(id, cert)});
-    // return a promise to keep API consistent
+    // Return a promise to keep API consistent
     return Promise.resolve(github);
   }
 
@@ -30,12 +30,12 @@ module.exports = function ({id, cert, debug = false}) {
   // Internal - no need to exose this right now
   function generateJwt(id, cert) {
     const payload = {
-      iat: Math.floor(new Date() / 1000),       // issued at time
+      iat: Math.floor(new Date() / 1000),       // Issued at time
       exp: Math.floor(new Date() / 1000) + 60,  // JWT expiration time
       iss: id                                   // Integration's GitHub id
     };
 
-    // sign with RSA SHA256
+    // Sign with RSA SHA256
     return jwt.sign(payload, cert, {algorithm: 'RS256'});
   }
 
