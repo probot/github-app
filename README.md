@@ -1,7 +1,5 @@
 # GitHub Integration
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/bkeepers/github-integration.svg)](https://greenkeeper.io/)
-
 NodeJS module for building [GitHub Integrations](https://developer.github.com/early-access/integrations/).
 
 ## Installation
