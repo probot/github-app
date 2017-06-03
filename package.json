@@ -10,12 +10,12 @@
   "author": "Brandon Keepers",
   "license": "ISC",
   "dependencies": {
-    "github": "^8.1.0",
+    "github": "^9.2.0",
     "github-webhook-handler": "^0.6.0",
     "jsonwebtoken": "^7.3.0"
   },
   "devDependencies": {
-    "xo": "^0.17.1"
+    "xo": "^0.18.0"
   },
   "xo": {
     "esnext": true,
