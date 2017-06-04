@@ -6,6 +6,7 @@
 
 const http = require('http');
 const fs = require('fs');
+/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
 const createWebhook = require('github-webhook-handler');
 const createIntegration = require('../index.js');
 
