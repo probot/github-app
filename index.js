@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const GitHubApi = require('github');
 
 module.exports = function ({id, cert, debug = false}) {
-  function asIntegration() {
+  function asApp() {
     const github = new GitHubApi({debug});
     github.authenticate({type: 'integration', token: generateJwt(id, cert)});
     // Return a promise to keep API consistent
@@ -20,7 +20,7 @@ module.exports = function ({id, cert, debug = false}) {
 
   // https://developer.github.com/early-access/integrations/authentication/#as-an-installation
   function createToken(installationId) {
-    return asIntegration().then(github => {
+    return asApp().then(github => {
       return github.integrations.createInstallationToken({
         installation_id: installationId
       });
@@ -39,5 +39,5 @@ module.exports = function ({id, cert, debug = false}) {
     return jwt.sign(payload, cert, {algorithm: 'RS256'});
   }
 
-  return {asIntegration, asInstallation, createToken};
+  return {asApp, asInstallation, createToken};
 };

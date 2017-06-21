@@ -1,8 +1,8 @@
 {
-  "name": "github-integration",
+  "name": "github-app",
   "version": "2.0.1",
-  "description": "NodeJS module for building GitHub Integrations",
-  "repository": "bkeepers/github-integration",
+  "description": "NodeJS module for building GitHub Apps",
+  "repository": "probot/github-app",
   "main": "index.js",
   "scripts": {
     "test": "xo"
