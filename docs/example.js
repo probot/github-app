@@ -1,22 +1,22 @@
 #!/usr/bin/env node
 // Dependencies:
-//   * npm install github github-integration github-webhook-handler
+//   * npm install github github-app github-webhook-handler
 //
-// Usage: INTEGRATION_ID=417 node example.js
+// Usage: APP_ID=417 node example.js
 
 const http = require('http');
 const fs = require('fs');
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
 const createWebhook = require('github-webhook-handler');
-const createIntegration = require('../index.js');
+const createGitHubApp = require('../index.js');
 
 const webhook = createWebhook({
   path: '/',
   secret: process.env.WEBHOOK_SECRET || 'development'
 });
 
-const integration = createIntegration({
-  id: process.env.INTEGRATION_ID,
+const app = createGitHubApp({
+  id: process.env.APP_ID,
   cert: process.env.PRIVATE_KEY || fs.readFileSync('private-key.pem')
 });
 
@@ -36,7 +36,7 @@ const server = http.createServer((req, res) => {
 // Comment on opened issues
 webhook.on('issues', event => {
   if (event.payload.action === 'opened') {
-    integration.asInstallation(event.payload.installation.id).then(github => {
+    app.asInstallation(event.payload.installation.id).then(github => {
       github.issues.createComment({
         owner: event.payload.repository.owner.login,
         repo: event.payload.repository.name,
