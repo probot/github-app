@@ -1,5 +1,7 @@
 # GitHub Apps
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/probot/github-app.svg)](https://greenkeeper.io/)
+
 NodeJS module for building [GitHub Apps](https://developer.github.com/apps/).
 
 ## Installation
