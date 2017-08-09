@@ -21,7 +21,7 @@ module.exports = function ({id, cert, debug = false}) {
   // https://developer.github.com/early-access/integrations/authentication/#as-an-installation
   function createToken(installationId) {
     return asApp().then(github => {
-      return github.integrations.createInstallationToken({
+      return github.apps.createInstallationToken({
         installation_id: installationId
       });
     });
