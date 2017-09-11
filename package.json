@@ -5,7 +5,7 @@
   "repository": "probot/github-app",
   "main": "index.js",
   "scripts": {
-    "test": "xo"
+    "test": "standard"
   },
   "author": "Brandon Keepers",
   "license": "ISC",
@@ -14,13 +14,12 @@
     "jsonwebtoken": "^7.3.0"
   },
   "devDependencies": {
-    "xo": "^0.18.0"
+    "eslint-plugin-import": "^2.7.0",
+    "standard": "^10.0.3"
   },
-  "xo": {
-    "esnext": true,
-    "space": true,
-    "rules": {
-      "camelcase": 1
-    }
+  "standard": {
+    "env": [
+      "mocha"
+    ]
   }
 }
