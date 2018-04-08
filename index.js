@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const GitHubApi = require('github')
+const GitHubApi = require('@octokit/rest')
 
 module.exports = function ({id, cert, debug = false}) {
   function asApp () {

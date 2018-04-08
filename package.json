@@ -10,12 +10,12 @@
   "author": "Brandon Keepers",
   "license": "ISC",
   "dependencies": {
-    "github": "^10.1.0",
-    "jsonwebtoken": "^7.3.0"
+    "@octokit/rest": "^15.2.6",
+    "jsonwebtoken": "^8.2.1"
   },
   "devDependencies": {
     "eslint-plugin-import": "^2.7.0",
-    "standard": "^10.0.3"
+    "standard": "^11.0.1"
   },
   "standard": {
     "env": [
