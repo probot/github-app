@@ -30,9 +30,9 @@ module.exports = function ({id, cert, debug = false}) {
   // Internal - no need to exose this right now
   function generateJwt (id, cert) {
     const payload = {
-      iat: Math.floor(new Date() / 1000),       // Issued at time
-      exp: Math.floor(new Date() / 1000) + 60,  // JWT expiration time
-      iss: id                                   // Integration's GitHub id
+      iat: Math.floor(new Date() / 1000), // Issued at time
+      exp: Math.floor(new Date() / 1000) + 60, // JWT expiration time
+      iss: id // Integration's GitHub id
     }
 
     // Sign with RSA SHA256
