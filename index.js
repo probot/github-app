@@ -4,7 +4,7 @@ const GitHubApi = require('@octokit/rest')
 module.exports = function ({id, cert, debug = false}) {
   function asApp () {
     const github = new GitHubApi({debug})
-    github.authenticate({type: 'integration', token: generateJwt(id, cert)})
+    github.authenticate({type: 'app', token: generateJwt(id, cert)})
     // Return a promise to keep API consistent
     return Promise.resolve(github)
   }
