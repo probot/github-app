@@ -1,5 +1,5 @@
 {
-  "name": "github-app",
+  "name": "@octokit/github-app",
   "version": "3.2.0",
   "description": "NodeJS module for building GitHub Apps",
   "repository": "probot/github-app",
@@ -10,12 +10,15 @@
   "author": "Brandon Keepers",
   "license": "ISC",
   "dependencies": {
-    "github": "^10.1.0",
     "jsonwebtoken": "^7.3.0"
   },
   "devDependencies": {
+    "@octokit/rest": "^15.10.0",
     "eslint-plugin-import": "^2.7.0",
     "standard": "^10.0.3"
+  },
+  "peerDependencies": {
+    "@octokit/rest": "^15.0.0"
   },
   "standard": {
     "env": [

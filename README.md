@@ -1,52 +1,48 @@
-# GitHub Apps
+# GitHub App authentication for @octokit/rest
 
-NodeJS module for building [GitHub Apps](https://developer.github.com/apps/).
+> an @octokit/rest plugin for authenticating as a [GitHub App](https://developer.github.com/apps/) or installation
 
 ## Installation
 
 ```
-npm install --save github-app
+npm install --save @octokit/github-app
 ```
 
 ## Usage
 
 ```js
-const createApp = require('github-app');
+const octokit = require('@octokit/rest')()
+const githubApp = require('@octokit/github-app')
+const fs = require('fs')
 
-const app = createApp({
-  // Your app id
-  id: 987,
-  // The private key for your app, which can be downloaded from the
-  // app's settings: https://github.com/settings/apps
-  cert: require('fs').readFileSync('private-key.pem')
-});
+octokit.plugin(githubApp({
+  id: 1234,
+  pem: fs.readFileSync('private-key.pem', 'UTF-8')
+}))
 ```
 
-### `asInstallation`
-
-Authenticate [as an installation](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-an-installation), returning a [github API client](https://github.com/mikedeboer/node-github), which can be used to call any of the [APIs supported by GitHub Apps](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-an-installation):
+All requests are now authenticated [as the app](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-a-github-app).
 
 ```js
-//Modify value according to getInstallations return(example in asApp section)
-var installationId = 99999;
+octokit.apps.getInstallations({}).then(res => {
+  console.log('Installations:', res)  
+})
+```
 
-app.asInstallation(installationId).then(github => {
-  github.issues.createComment({
+To authenticate [as a specific installation](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-an-installation), which can be used to call any of the [APIs supported by GitHub Apps](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-an-installation), call `authenticate` with `type: 'installation'`:
+
+```js
+octokit.authenticate({
+  type: 'installation',
+  id: 12345
+}).then(() => {
+  octokit.issues.createComment({
     owner: 'foo',
     repo: 'bar',
     number: 999,
     body: 'hello world!'
-  });
-});
+  })
+})
 ```
 
-### `asApp`
-
-Authenticate [as an app](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-a-github-app), also returning an instance of the GitHub API client.
-
-```js
-app.asApp().then(github => {
-  console.log("Installations:")
-  github.apps.getInstallations({}).then(console.log);
-});
-```
+> **Important!** This plugin changes the API of `octokit.authenticate` to return a `Promise`. You _must_ wait for the Promise to resolve with `await` or by calling `.then()`.
