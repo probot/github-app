@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken')
 const GitHubApi = require('@octokit/rest')
 
 module.exports = function ({id, cert, debug = false}) {
-  function asApp () {
+  function asApp (jwtExpirationPeriodInSeconds = 60) {
     const github = new GitHubApi({debug})
-    github.authenticate({type: 'app', token: generateJwt(id, cert)})
+    github.authenticate({type: 'app', token: generateJwt(id, cert, jwtExpirationPeriodInSeconds)})
     // Return a promise to keep API consistent
     return Promise.resolve(github)
   }
@@ -27,11 +27,11 @@ module.exports = function ({id, cert, debug = false}) {
     })
   }
 
-  // Internal - no need to exose this right now
-  function generateJwt (id, cert) {
+  // Internal - no need to expose this right now
+  function generateJwt (id, cert, expirationPeriodInSeconds) {
     const payload = {
       iat: Math.floor(new Date() / 1000), // Issued at time
-      exp: Math.floor(new Date() / 1000) + 60, // JWT expiration time
+      exp: Math.floor(new Date() / 1000) + expirationPeriodInSeconds, // JWT expiration time
       iss: id // Integration's GitHub id
     }
 

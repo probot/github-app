@@ -50,3 +50,5 @@ app.asApp().then(github => {
   github.apps.getInstallations({}).then(console.log);
 });
 ```
+
+Also you can pass single parameter to `asApp` method — expiration period of JWT, in seconds. By default it is one minute.
