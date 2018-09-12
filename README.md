@@ -51,4 +51,4 @@ app.asApp().then(github => {
 });
 ```
 
-Also you can pass single parameter to `asApp` method — life time of JWT, in seconds. By default it is one minute.
+Also you can pass single parameter to `asApp` method — life time of JWT, in seconds. By default it is one minute. Note that [maximum allowed by GitHub value](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) is 10 minutes.
