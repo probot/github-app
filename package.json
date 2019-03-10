@@ -10,8 +10,8 @@
   "author": "Brandon Keepers",
   "license": "ISC",
   "dependencies": {
-    "@octokit/rest": "^15.10.0",
-    "jsonwebtoken": "^8.2.1"
+    "@octokit/app": "^2.2.1",
+    "@octokit/rest": "^16.17.0"
   },
   "devDependencies": {
     "eslint-plugin-import": "^2.7.0",
