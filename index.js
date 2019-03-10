@@ -17,13 +17,6 @@ module.exports = function ({id, cert, debug = false}) {
 
   // Authenticate as the given installation
   function asInstallation (installationId) {
-    const octokit = new Octokit({
-      auth() {
-        return createToken(installationId)
-          .then(installationAccessToken => 'token ' + installationAccessToken)
-      },
-    })
-
     return createToken(installationId).then(installationAccessToken => {
       const octokit = new Octokit({
         auth: 'token ' + installationAccessToken,
