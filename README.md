@@ -1,3 +1,7 @@
+# DEPRECATED
+
+Replaced by [`@octokit/auth-app`](https://github.com/octokit/auth-app.js/)
+
 # GitHub Apps
 
 NodeJS module for building [GitHub Apps](https://developer.github.com/apps/).
