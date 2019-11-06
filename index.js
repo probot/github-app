@@ -1,42 +1,35 @@
-const jwt = require('jsonwebtoken')
-const GitHubApi = require('@octokit/rest')
+const App = require('@octokit/app')
+const Octokit = require('@octokit/rest')
 
 module.exports = function ({id, cert, debug = false}) {
-  function asApp () {
-    const github = new GitHubApi({debug})
-    github.authenticate({type: 'app', token: generateJwt(id, cert)})
-    // Return a promise to keep API consistent
-    return Promise.resolve(github)
-  }
+  const app = new App({ id, privateKey: cert, debug })
 
-  // Authenticate as the given installation
-  function asInstallation (installationId) {
-    return createToken(installationId).then(res => {
-      const github = new GitHubApi({debug})
-      github.authenticate({type: 'token', token: res.data.token})
-      return github
-    })
+  function asApp () {
+    return Promise.resolve(app)
   }
 
   // https://developer.github.com/early-access/integrations/authentication/#as-an-installation
   function createToken (installationId) {
-    return asApp().then(github => {
-      return github.apps.createInstallationToken({
-        installation_id: installationId
-      })
+    return app.getInstallationAccessToken({
+      installationId: installationId
     })
   }
 
-  // Internal - no need to exose this right now
-  function generateJwt (id, cert) {
-    const payload = {
-      iat: Math.floor(new Date() / 1000), // Issued at time
-      exp: Math.floor(new Date() / 1000) + 60, // JWT expiration time
-      iss: id // Integration's GitHub id
-    }
+  // Authenticate as the given installation
+  function asInstallation (installationId) {
+    return createToken(installationId).then(installationAccessToken => {
+      const octokit = new Octokit({
+        auth: 'token ' + installationAccessToken
+      })
 
-    // Sign with RSA SHA256
-    return jwt.sign(payload, cert, {algorithm: 'RS256'})
+      // expose installationa access token as it can be useful
+      if (!octokit.auth) {
+        octokit.auth = {}
+      }
+      octokit.auth.token = installationAccessToken
+
+      return octokit
+    })
   }
 
   return {asApp, asInstallation, createToken}

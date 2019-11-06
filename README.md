@@ -28,7 +28,7 @@ const app = createApp({
 
 ### `asInstallation`
 
-Authenticate [as an installation](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-an-installation), returning a [github API client](https://github.com/mikedeboer/node-github), which can be used to call any of the [APIs supported by GitHub Apps](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-an-installation):
+Authenticate [as an installation](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-an-installation), returning a [github API client](https://github.com/octokit/rest.js), which can be used to call any of the [APIs supported by GitHub Apps](https://developer.github.com/apps/building-integrations/setting-up-and-registering-github-apps/about-authentication-options-for-github-apps/#authenticating-as-an-installation):
 
 ```js
 //Modify value according to getInstallations return(example in asApp section)
